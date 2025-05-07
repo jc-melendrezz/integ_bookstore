@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django files
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+
+# Virtual environments
+env/
+
+# Environment variables
+.env
+
+# VS Code config (optional)
+.vscode/
