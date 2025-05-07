@@ -6,6 +6,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     isbn = models.CharField(max_length=20, null=True, blank=True)
+    genre = models.CharField(max_length=100, blank=True, null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     stock = models.IntegerField()
     cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
@@ -32,7 +33,13 @@ class Book(models.Model):
             if self.sale_start <= now <= self.sale_end:
                 return int(self.discount_percentage)
         return 0
-
+    
+    def check_and_update_sale_status(self):
+        if self.on_sale and self.sale_end and timezone.now() > self.sale_end:
+            self.on_sale = False
+            self.current_price = self.price
+            self.save()
+            
     def __str__(self):
         return self.title
 

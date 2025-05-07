@@ -19,12 +19,19 @@ from django.urls import path, include
 from main.views import home, landing_page
 from django.conf import settings
 from django.conf.urls.static import static
+from main.views import add_to_cart, cart_view, checkout_view, process_checkout
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', landing_page, name="landing_page"),
-    path('home/', home, name="home")
+    path('home/', home, name="home"),
+    path('add-to-cart/<int:book_id>/', add_to_cart, name='add_to_cart'),
+    path('cart/', cart_view, name='cart_view'),
+    path('checkout/', checkout_view, name='checkout'),
+    path('process-checkout/',process_checkout, name='process_checkout'),
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout')
 ]
 
 if settings.DEBUG:
