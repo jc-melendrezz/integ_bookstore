@@ -19,7 +19,7 @@ from django.urls import path, include
 from main.views import home, landing_page
 from django.conf import settings
 from django.conf.urls.static import static
-from main.views import add_to_cart, cart_view, checkout_view, process_checkout
+from main.views import add_to_cart, cart_view, checkout_view, process_checkout, books_page
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -31,7 +31,8 @@ urlpatterns = [
     path('cart/', cart_view, name='cart_view'),
     path('checkout/', checkout_view, name='checkout'),
     path('process-checkout/',process_checkout, name='process_checkout'),
-    path('logout/', LogoutView.as_view(next_page='login'), name='logout')
+    path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
+    path('books/', books_page, name='books_page'),
 ]
 
 if settings.DEBUG:

@@ -112,3 +112,7 @@ def process_checkout(request):
         return render(request, 'main/checkout_success.html')
     return render(request, 'main/checkout_success.html') 
     
+def books_page(request):
+    books = Book.objects.all()
+    return render(request, 'main/books.html', {'books': books})   
+    
